@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder
         $this->call([Users_table_seeder::class,Categories_table_seeder::class,Post_table_seeder::class,Comment_table_seeder::class]);
  
         $this->command->info('Dummy datas has been inserted successfully');
-        $this->command->info("Please login using johndoe@blog.com & 12345678 as password");
+        $this->command->info("Please login using".varSet::$user->email." & 12345678 as password");
     }
 }
 
@@ -60,8 +60,8 @@ class Users_table_seeder extends Seeder
     public function run()
     {
         varSet::$user = User::create([
-            'email'=>'johndoe@blog.com',
-            'name'=>'John Doe',
+            'email'=>varSet::$fake_datas->email(),
+            'name'=>varSet::$fake_datas->name(),
             'password'=>Hash::make('12345678')
         ]);
     }
@@ -86,9 +86,9 @@ class Post_table_seeder extends Seeder
     {
 
         varSet::$post = Posts::create([
-            'title' => Str::random(10),
-            'caption' => "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-            'content' => $content,
+            'title' => varSet::$fake_datas->name(),
+            'caption' => varSet::$fake_datas->text(),
+            'content' => varSet::$fake_datas->paragraph(4),
             'image_url' => "https://www.maxitendance.com/wp-content/uploads/2021/09/doodle-ipsum-lorem-ipsum-illustration-01.jpg",
             'category' => varSet::$category->id,
             'user_id' => varSet::$user->id,
@@ -110,7 +110,7 @@ class Comment_table_seeder extends Seeder
     public function run()
     {
         Comments::create([
-            'comment' => 'The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters',
+            'comment' => varSet::$fake_datas->text(),
             'user_id' => varSet::$user->id,
             'post_id' => varSet::$post->id,
             'created_at' => varSet::$curr_timestamp,
