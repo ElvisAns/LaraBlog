@@ -14,8 +14,8 @@ class AddTwoColumnOnComments extends Migration
     public function up()
     {
         Schema::table('comments', function (Blueprint $table) {
-            $table->Integer('user_id');
-            $table->integer('post_id');
+            $table->addColumn('Integer','user_id');
+            $table->addColumn('Integer','post_id');
         });
     }
 
