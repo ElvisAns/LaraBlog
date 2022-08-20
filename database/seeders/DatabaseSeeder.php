@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-
+        $this->command->warn('Remember Each time you seed, a couple of user,post and comment is automatically created');
         $this->call([Users_table_seeder::class,Categories_table_seeder::class,Post_table_seeder::class,Comment_table_seeder::class]);
  
         $this->command->info('Dummy datas has been inserted successfully');
