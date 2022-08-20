@@ -11,14 +11,16 @@
                 class="col-lg-4 col-md-12"
                 :key="blog.id"
             >
-                <div class="card m-4" style="width: 18rem">
+                <div class="card m-4 mx-auto shadow-lg" style="width: 18rem">
                     <img :src="blog.image_url" class="card-img-top" alt="..." />
                     <div class="card-body">
                         <h5 class="card-title">{{ blog.title }}</h5>
                         <p class="card-text">
                             {{ blog.caption }}
                         </p>
-                        <router-link :to="'/posts/read/' + blog.id"
+                        <router-link
+                            class="btn w-100 btn-success"
+                            :to="'/posts/read/' + blog.id"
                             >Read</router-link
                         >
                     </div>

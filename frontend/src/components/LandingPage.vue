@@ -25,6 +25,14 @@
         </div>
     </div>
     <TheBlogList :onlySample="isSample"/>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <button class="my-5 btn btn-md btn-dark">Load All</button>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
