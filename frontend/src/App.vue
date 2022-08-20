@@ -1,8 +1,5 @@
 <template>
-    <nav>
-        <router-link to="/">Home</router-link> |
-        <router-link to="/about">About</router-link>
-    </nav>
+    <TheNavbar />
     <router-view />
 </template>
 
@@ -28,3 +25,12 @@ nav a.router-link-exact-active {
     color: #42b983;
 }
 </style>
+
+<script>
+import TheNavbar from "./components/TheNavbar";
+export default {
+    components: {
+        TheNavbar,
+    },
+};
+</script>
