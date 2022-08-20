@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder
         $this->call([Users_table_seeder::class,Categories_table_seeder::class,Post_table_seeder::class,Comment_table_seeder::class]);
  
         $this->command->info('Dummy datas has been inserted successfully');
-        $this->command->info("Please login using".varSet::$user->email." & 12345678 as password");
+        $this->command->info("Please login using ".varSet::$user->email." & 12345678 as password");
     }
 }
 
