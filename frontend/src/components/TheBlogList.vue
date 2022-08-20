@@ -18,6 +18,9 @@
                         <p class="card-text">
                             {{ blog.caption }}
                         </p>
+                        <router-link :to="'/posts/read/' + blog.id"
+                            >Read</router-link
+                        >
                     </div>
                 </div>
             </div>
