@@ -20,7 +20,7 @@
                         </p>
                         <router-link
                             class="btn w-100 btn-success"
-                            :to="'/posts/read/' + blog.id"
+                            :to="'/posts/read/' + blog.title.replace(/ /g, '-')"
                             >Read</router-link
                         >
                     </div>
