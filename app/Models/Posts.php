@@ -25,4 +25,13 @@ class Posts extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function post_category(){
+        return $this->belongsTo(Categories::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comments::class,'post_id'); #"post_id" is the foreign key in the comment table
+    }
 }

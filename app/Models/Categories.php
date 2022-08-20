@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Posts;
+
 class Categories extends Model
 {
     public $timestamps = false; #disable timestamp insertion
@@ -15,4 +17,8 @@ class Categories extends Model
         'name',
         'details'
     ];
+
+    public function posts(){
+        return $this->hasMany(Posts::class)
+    }
 }

@@ -22,4 +22,8 @@ class Comments extends Model
         'updated_at',
         'created_at'
     ];
+
+    public function post(){
+        return $this->belongsTo(Posts::class);
+    }
 }
