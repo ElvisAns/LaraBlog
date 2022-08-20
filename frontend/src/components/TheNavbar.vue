@@ -2,12 +2,14 @@
     <div class="bg-dark">
         <div class="container">
             <div class="row">
-                <div class="col-12 mt-3">
+                <div class="col-12 my-3">
                     <nav
                         class="navbar navbar-expand-lg navbar-dark bg-dark text-white"
                     >
                         <div class="container-fluid">
-                            <a class="navbar-brand" href="#">Hello</a>
+                            <a class="navbar-brand" href="#">
+                                <i class="bi bi-slack"></i> OurBlog
+                            </a>
                             <button
                                 class="navbar-toggler"
                                 type="button"
