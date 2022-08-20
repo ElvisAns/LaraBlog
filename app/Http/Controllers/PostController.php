@@ -62,8 +62,15 @@ class PostController extends Controller
         }
     }
 
-    public function delete($post_id){
+    public function destroy($post_id){
         $post = Posts::find($post_id);
-        $post->delete();
+        if($post){
+            $post->comments()->delete();
+            $post->delete();
+            return ['reponse'=>'Post Updated'];
+        }
+        else{
+            return response(['response'=>'Error deleting post,post don\'t exist']);
+        }
     }
 }
