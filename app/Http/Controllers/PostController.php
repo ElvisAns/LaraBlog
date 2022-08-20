@@ -13,6 +13,19 @@ class PostController extends Controller
     }
 
     public function read($title){
-        $post = Posts::where("title","=",$title)->
+        $post = Posts::where("title",$title)->first();
+        return $post;
+    }
+
+    public function create(Request $request){
+        $post = new Posts();
+        $post->title=$request->input('title');
+        $post->caption=$request->input('');
+        $post->content=$request->input('');
+        $post->image_url=$request->input('');
+        $post->category=$request->input('');
+        $post->user_id=$request->input('');
+        $post->created_at=$request->input('');
+        $post->updated_at=$request->input('');
     }
 }
