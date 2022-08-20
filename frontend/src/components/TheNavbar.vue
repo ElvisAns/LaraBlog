@@ -27,20 +27,34 @@
                             >
                                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                     <li class="nav-item">
-                                        <a
+                                        <router-link
                                             class="nav-link active"
                                             aria-current="page"
-                                            href="#"
-                                            >Home</a
+                                            to="/"
                                         >
+                                            <i class="bi bi-house-fill"></i>
+                                            Home
+                                        </router-link>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Link</a>
+                                        <router-link
+                                            class="nav-link"
+                                            aria-current="page"
+                                            to="/"
+                                        >
+                                            <i class="bi bi-bookmark"></i>
+                                            Posts
+                                        </router-link>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link disabled"
-                                            >Disabled</a
+                                        <router-link
+                                            class="nav-link"
+                                            aria-current="page"
+                                            to="/"
                                         >
+                                            <i class="bi bi-chat-left"></i>
+                                            Contact us
+                                        </router-link>
                                     </li>
                                 </ul>
                                 <form class="d-flex" role="search">
@@ -75,5 +89,8 @@ export default {
 <style scoped>
 .navbar-brand {
     margin-right: 60px;
+}
+.nav-item {
+    padding: 0px 10px;
 }
 </style>

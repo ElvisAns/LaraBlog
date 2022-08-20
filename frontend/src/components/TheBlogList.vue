@@ -28,15 +28,31 @@
 <script>
 export default {
     name: "TheBlogList",
+    props: {
+        onlySample: {
+            default: true,
+            type: Boolean,
+        },
+    },
     data() {
         return {
             blogs: null,
         };
     },
     mounted() {
-        this.axios.get("http://127.0.0.1:8000/api/posts/4").then((request) => {
-            this.blogs = request.data;
-        });
+        if (this.onlySample) {
+            this.axios
+                .get(`http://127.0.0.1:8000/api/posts/3`)
+                .then((request) => {
+                    this.blogs = request.data;
+                });
+        } else {
+            this.axios
+                .get(`http://127.0.0.1:8000/api/posts/`)
+                .then((request) => {
+                    this.blogs = request.data;
+                });
+        }
     },
 };
 </script>
