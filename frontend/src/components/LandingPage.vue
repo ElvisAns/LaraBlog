@@ -24,15 +24,14 @@
             </div>
         </div>
     </div>
-    <TheBlogList :onlySample="isSample"/>
-
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <button class="my-5 btn btn-md btn-dark">Load All</button>
+                <button @click="toggleSample" class="my-5 btn btn-md btn-dark shadow-lg load">{{ buttonText }}</button>
             </div>
         </div>
     </div>
+    <TheBlogList :onlySample="isSample" :key="keyComp"/>
 </template>
 
 <script>
@@ -46,7 +45,16 @@ export default {
     data() {
         return {
             isSample: true,
+            keyComp: 1,
+            buttonText: "See All posts",
         };
+    },
+    methods: {
+        toggleSample() {
+            this.isSample = !this.isSample;
+            this.keyComp++;
+            this.buttonText = this.isSample ? "See All posts" : "Load less";
+        },
     },
 };
 </script>
@@ -78,5 +86,8 @@ export default {
 .fancy {
     -webkit-text-decoration: rgb(134, 134, 134) double underline;
     text-decoration: rgb(134, 134, 134) double underline;
+}
+.load {
+    width: 200px;
 }
 </style>
