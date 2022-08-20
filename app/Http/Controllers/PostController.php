@@ -67,10 +67,10 @@ class PostController extends Controller
         if($post){
             $post->comments()->delete();
             $post->delete();
-            return ['reponse'=>'Post Updated'];
+            return ['reponse'=>'Post successfully deleted'];
         }
         else{
-            return response(['response'=>'Error deleting post,post don\'t exist']);
+            return response(['response'=>'Error deleting post,post don\'t exist'],404);
         }
     }
 }
