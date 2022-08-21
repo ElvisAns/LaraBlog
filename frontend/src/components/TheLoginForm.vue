@@ -108,16 +108,21 @@ export default {
             console.log("here we go");
             this.submit_disabled = true;
             let loader = this.$loading.show({
-                // Optional parameters
                 container: this.fullPage ? null : this.$refs.formContainer,
                 canCancel: false,
-                onCancel: this.onCancel,
             });
 
-            setTimeout(() => {
-                loader.hide();
-                this.submit_disabled = false;
-            }, 3000);
+            this.axios
+                .post(`${process.env.VUE_APP_BACKEND_BASE_URL}/login`, {
+                    email: this.email,
+                    password: this.password,
+                })
+                .then((res) => {
+                    this.$store.commit("makeLogin", res.data); //backend reply with user datas
+                })
+                .catch((res)=>{
+                    alert
+                })
         },
     },
 };
