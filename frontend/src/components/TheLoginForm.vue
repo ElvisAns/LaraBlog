@@ -12,6 +12,7 @@
                     @submit="login"
                     novalidate
                     ref="formContainer"
+                    :class="formValidation"
                 >
                     <div class="col-md-12">
                         <label for="validationCustomUsername" class="form-label"
@@ -30,6 +31,7 @@
                                 class="form-control"
                                 aria-describedby="inputGroupPrepend"
                                 required
+                                :class="emailValidate"
                             />
                             <div class="invalid-feedback">
                                 invalid email address
@@ -53,7 +55,7 @@
                                 class="form-control"
                                 aria-describedby="inputGroupPrepend"
                                 required
-                                min-length="5"
+                                :class="passwordValidate"
                             />
                             <div class="invalid-feedback">invalid password</div>
                         </div>
@@ -81,6 +83,9 @@ export default {
         return {
             email: "",
             password: "",
+            emailValidate: "",
+            passwordValidate: "",
+            formValidation: "",
             fullPage: false,
             submit_disabled: false,
         };
