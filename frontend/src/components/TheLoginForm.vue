@@ -74,6 +74,7 @@
 </template>
 
 <script>
+import { useToast } from "vue-toastification";
 export default {
     name: "TheLoginForm",
     data() {
@@ -104,8 +105,8 @@ export default {
     },
     methods: {
         login(event) {
+            const toast = useToast();
             event.preventDefault();
-            console.log("here we go");
             this.submit_disabled = true;
             let loader = this.$loading.show({
                 container: this.fullPage ? null : this.$refs.formContainer,
@@ -113,16 +114,28 @@ export default {
             });
 
             this.axios
-                .post(`${process.env.VUE_APP_BACKEND_BASE_URL}/login`, {
-                    email: this.email,
-                    password: this.password,
-                })
+                .post(
+                    `${process.env.VUE_APP_BACKEND_BASE_URL}/login`,
+                    {
+                        email: this.email,
+                        password: this.password,
+                    },
+                    {
+                        timeout: 5,
+                    }
+                )
                 .then((res) => {
+                    loader.hide();
+                    toast.success("User logged in with sucess");
                     this.$store.commit("makeLogin", res.data); //backend reply with user datas
+                    this.submit_disabled = false;
                 })
-                .catch((res)=>{
-                    alert
-                })
+                // eslint-disable-next-line no-unused-vars
+                .catch((_error) => {
+                    loader.hide();
+                    toast.error("Error trying to login with your informations");
+                    this.submit_disabled = false;
+                });
         },
     },
 };
