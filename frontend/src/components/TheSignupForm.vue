@@ -182,25 +182,30 @@ export default {
 
             this.axios
                 .post(
-                    `${process.env.VUE_APP_BACKEND_BASE_URL}/login`,
+                    `${process.env.VUE_APP_BACKEND_BASE_URL}/signup`,
                     {
                         email: this.email,
                         password: this.password,
+                        name: this.name,
                     },
                     {
                         timeout: 5,
                     }
                 )
+                // eslint-disable-next-line no-unused-vars
                 .then((res) => {
                     loader.hide();
-                    toast.success("User logged in with sucess");
-                    this.$store.commit("makeLogin", res.data); //backend reply with user datas
+                    toast.success(
+                        "User signed up in with sucess,you can go and login"
+                    );
                     this.submit_disabled = false;
                 })
                 // eslint-disable-next-line no-unused-vars
                 .catch((_error) => {
                     loader.hide();
-                    toast.error("Error trying to login with your informations");
+                    toast.error(
+                        "Error trying to signup with your informations"
+                    );
                     this.submit_disabled = false;
                 });
         },
