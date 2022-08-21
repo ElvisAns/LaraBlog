@@ -92,8 +92,25 @@ export default {
     },
     methods: {
         login(event) {
+            const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
             const toast = useToast();
             event.preventDefault();
+            if (!emailPattern.test(this.email) || this.password.length < 5) {
+                if (emailPattern.test(this.email)) {
+                    this.emailValidate = "is-valid";
+                } else {
+                    this.emailValidate = "is-invalid";
+                }
+                if (this.password.length > 5) {
+                    this.passwordValidate = "is-valid";
+                } else {
+                    this.passwordValidate = "is-invalid";
+                }
+                return;
+            }
+            this.emailValidate = "is-valid";
+            this.passwordValidate = "is-valid";
+            this.formValidation = "was-validated";
             this.submit_disabled = true;
             let loader = this.$loading.show({
                 container: this.fullPage ? null : this.$refs.formContainer,
