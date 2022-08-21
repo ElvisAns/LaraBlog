@@ -1,6 +1,7 @@
 <template>
     <TheNavbar />
     <router-view />
+    <TheFooter />
 </template>
 
 <style>
@@ -28,9 +29,11 @@ nav a.router-link-exact-active {
 
 <script>
 import TheNavbar from "./components/TheNavbar";
+import TheFooter from "./components/TheFooter";
 export default {
     components: {
         TheNavbar,
+        TheFooter,
     },
 };
 </script>

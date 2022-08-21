@@ -22,8 +22,16 @@
                         <router-link
                             class="btn w-100 btn-success"
                             :to="'/posts/read/' + blog.title.replace(/ /g, '-')"
-                            >Read</router-link
                         >
+                            <i class="bi bi-box-arrow-right"></i>
+                            Read
+                        </router-link>
+                    </div>
+                    <div class="card-footer">
+                        <time :datetime="blog.created_at">
+                            <i class="bi bi-clock"></i>
+                            {{ format_date(blog.created_at) }}
+                        </time>
                     </div>
                 </div>
             </div>
@@ -57,11 +65,15 @@ export default {
                 behavior: "smooth",
             });
         },
+        format_date(Unformateddate) {
+            const d = new Date(Unformateddate);
+            return d.toLocaleString();
+        },
     },
     mounted() {
         if (this.onlySample) {
             this.axios
-                .get(`http://127.0.0.1:8000/api/posts/3`)
+                .get(`${process.env.VUE_APP_BACKEND_BASE_URL}/posts/3`)
                 .then((request) => {
                     setTimeout(() => {
                         this.blogs = request.data;
@@ -74,7 +86,7 @@ export default {
                 });
         } else {
             this.axios
-                .get(`http://127.0.0.1:8000/api/posts/`)
+                .get(`${process.env.VUE_APP_BACKEND_BASE_URL}/posts/`)
                 .then((request) => {
                     setTimeout(() => {
                         this.blogs = request.data;

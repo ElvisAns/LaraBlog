@@ -5,6 +5,7 @@ import store from "./store";
 import "bootstrap";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "animate.css";
 import axios from "axios";
 import VueAxios from "vue-axios";
 
