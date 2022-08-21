@@ -98,4 +98,8 @@ export default {
     font-weight: 900;
     font-size: 2em;
 }
+.blog-content {
+    padding-top: 10px;
+    text-align: justify;
+}
 </style>
