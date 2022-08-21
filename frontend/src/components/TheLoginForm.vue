@@ -15,13 +15,11 @@
                     :class="formValidation"
                 >
                     <div class="col-md-12">
-                        <label for="validationCustomUsername" class="form-label"
-                            >Email</label
-                        >
+                        <label for="em" class="form-label">Email</label>
                         <div class="input-group has-validation">
                             <span
                                 class="input-group-text"
-                                id="inputGroupPrepend"
+                                id="inputGroupPrepend1"
                                 ><i class="bi bi-envelope-fill"></i
                             ></span>
                             <input
@@ -29,8 +27,9 @@
                                 placeholder="johndoe@gmail.com"
                                 type="text"
                                 class="form-control"
-                                aria-describedby="inputGroupPrepend"
+                                aria-describedby="inputGroupPrepend1"
                                 required
+                                id="em"
                                 :class="emailValidate"
                             />
                             <div class="invalid-feedback">
@@ -39,13 +38,11 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <label for="validationCustomUsername" class="form-label"
-                            >Password</label
-                        >
+                        <label for="vp" class="form-label">Password</label>
                         <div class="input-group has-validation">
                             <span
                                 class="input-group-text"
-                                id="inputGroupPrepend"
+                                id="inputGroupPrepend2"
                                 ><i class="bi bi-key"></i
                             ></span>
                             <input
@@ -53,8 +50,9 @@
                                 placeholder=""
                                 type="password"
                                 class="form-control"
-                                aria-describedby="inputGroupPrepend"
+                                aria-describedby="inputGroupPrepend2"
                                 required
+                                id="vp"
                                 :class="passwordValidate"
                             />
                             <div class="invalid-feedback">invalid password</div>
