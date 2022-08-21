@@ -94,16 +94,11 @@ export default {
             const toast = useToast();
             event.preventDefault();
             if (!emailPattern.test(this.email) || this.password.length < 5) {
-                if (emailPattern.test(this.email)) {
-                    this.emailValidate = "is-valid";
-                } else {
-                    this.emailValidate = "is-invalid";
-                }
-                if (this.password.length > 5) {
-                    this.passwordValidate = "is-valid";
-                } else {
-                    this.passwordValidate = "is-invalid";
-                }
+                this.emailValidate = emailPattern.test(this.email)
+                    ? "is-valid"
+                    : "is-invalid";
+                this.passwordValidate =
+                    this.password.length > 5 ? "is-valid" : "is-invalid";
                 return;
             }
             this.emailValidate = "is-valid";
