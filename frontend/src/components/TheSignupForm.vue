@@ -15,12 +15,12 @@
                     :class="formValidation"
                 >
                     <div class="col-md-12">
-                        <label for="no" class="form-label">Noms</label>
+                        <label for="no" class="form-label">Full Name</label>
                         <div class="input-group has-validation1">
                             <span
                                 class="input-group-text"
                                 id="inputGroupPrepend"
-                                ><i class="bi bi-envelope-fill"></i
+                                ><i class="bi bi-person"></i
                             ></span>
                             <input
                                 v-model="name"
@@ -93,14 +93,14 @@
                                 ><i class="bi bi-key"></i
                             ></span>
                             <input
-                                v-model="password"
+                                v-model="passwordCheck"
                                 placeholder=""
                                 type="password"
                                 class="form-control"
                                 aria-describedby="inputGroupPrepend4"
                                 required
                                 id="vp2"
-                                :class="passwordValidate"
+                                :class="passwordCheckValidate"
                             />
                             <div class="invalid-feedback">
                                 password don't match
@@ -131,8 +131,12 @@ export default {
         return {
             email: "",
             password: "",
+            name: "",
+            passwordCheck: "",
             emailValidate: "",
             passwordValidate: "",
+            nameValidate:"",
+            passwordCheckValidate:"",
             formValidation: "",
             fullPage: false,
             submit_disabled: false,
@@ -141,6 +145,7 @@ export default {
     methods: {
         login(event) {
             const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+
             const toast = useToast();
             event.preventDefault();
             if (!emailPattern.test(this.email) || this.password.length < 5) {
