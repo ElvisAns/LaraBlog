@@ -31,72 +31,32 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <label for="validationCustom03" class="form-label"
-                            >City</label
+                    <div class="col-md-12">
+                        <label for="validationCustomUsername" class="form-label"
+                            >Password</label
                         >
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="validationCustom03"
-                            required
-                        />
-                        <div class="invalid-feedback">
-                            Please provide a valid city.
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="validationCustom04" class="form-label"
-                            >State</label
-                        >
-                        <select
-                            class="form-select"
-                            id="validationCustom04"
-                            required
-                        >
-                            <option selected disabled value="">
-                                Choose...
-                            </option>
-                            <option>...</option>
-                        </select>
-                        <div class="invalid-feedback">
-                            Please select a valid state.
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="validationCustom05" class="form-label"
-                            >Zip</label
-                        >
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="validationCustom05"
-                            required
-                        />
-                        <div class="invalid-feedback">
-                            Please provide a valid zip.
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="form-check">
+                        <div class="input-group has-validation">
+                            <span
+                                class="input-group-text"
+                                id="inputGroupPrepend"
+                                ><i class="bi bi-key"></i
+                            ></span>
                             <input
-                                class="form-check-input"
-                                type="checkbox"
-                                value=""
-                                id="invalidCheck"
+                                placeholder=""
+                                type="password"
+                                class="form-control"
+                                id="validationCustomUsername"
+                                aria-describedby="inputGroupPrepend"
                                 required
                             />
-                            <label class="form-check-label" for="invalidCheck">
-                                Agree to terms and conditions
-                            </label>
                             <div class="invalid-feedback">
-                                You must agree before submitting.
+                                {{ error.password }}
                             </div>
                         </div>
                     </div>
                     <div class="col-12">
-                        <button class="btn btn-primary" type="submit">
-                            Submit form
+                        <button class="btn btn-success" type="submit">
+                            Let me in! <i class="bi bi-box-arrow-right"></i>
                         </button>
                     </div>
                 </form>
