@@ -1,11 +1,17 @@
 import { createRouter, createWebHistory } from "vue-router";
 import LandingPage from "../components/LandingPage.vue";
+import TheLoginForm from "../components/TheLoginForm.vue";
 
 const routes = [
     {
         path: "/",
         name: "home",
         component: LandingPage,
+    },
+    {
+        path: "/auth/login",
+        name: "login",
+        component: TheLoginForm,
     },
 ];
 
