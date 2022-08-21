@@ -135,8 +135,8 @@ export default {
             passwordCheck: "",
             emailValidate: "",
             passwordValidate: "",
-            nameValidate:"",
-            passwordCheckValidate:"",
+            nameValidate: "",
+            passwordCheckValidate: "",
             formValidation: "",
             fullPage: false,
             submit_disabled: false,
@@ -145,24 +145,34 @@ export default {
     methods: {
         login(event) {
             const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-
+            const namePattern = /^[a-zA-Z]+ [a-zA-Z]+$/;
             const toast = useToast();
             event.preventDefault();
-            if (!emailPattern.test(this.email) || this.password.length < 5) {
-                if (emailPattern.test(this.email)) {
-                    this.emailValidate = "is-valid";
-                } else {
-                    this.emailValidate = "is-invalid";
-                }
-                if (this.password.length > 5) {
-                    this.passwordValidate = "is-valid";
-                } else {
-                    this.passwordValidate = "is-invalid";
-                }
+            if (
+                !emailPattern.test(this.email) ||
+                this.password.length < 5 ||
+                this.passwordCheck !== this.password ||
+                !namePattern.test(this.name)
+            ) {
+                this.emailValidate = emailPattern.test(this.email)
+                    ? "is-valid"
+                    : "is-invalid";
+                this.passwordValidate =
+                    this.password.length > 5 ? "is-valid" : "is-invalid";
+
+                this.passwordCheckValidate =
+                    this.password !== this.passwordCheck
+                        ? "is-valid"
+                        : "is-invalid";
+                this.nameValidate = namePattern.test(this.name)
+                    ? "is-valid"
+                    : "is-invalid";
                 return;
             }
             this.emailValidate = "is-valid";
             this.passwordValidate = "is-valid";
+            this.passwordCheckValidate = "is-valid";
+            this.nameValidate = "is-valid";
             this.formValidation = "was-validated";
             this.submit_disabled = true;
             let loader = this.$loading.show({
