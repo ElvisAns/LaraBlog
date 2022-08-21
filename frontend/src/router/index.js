@@ -3,6 +3,8 @@ import LandingPage from "../components/LandingPage.vue";
 import TheLoginForm from "../components/TheLoginForm.vue";
 import TheSignupForm from "../components/TheSignupForm.vue";
 import ThePostViewer from "../components/ThePostViewer.vue";
+import TheUserProfile from "../components/TheUserProfile.vue";
+import store from "@/store";
 const routes = [
     {
         path: "/",
@@ -25,11 +27,25 @@ const routes = [
         component: ThePostViewer,
         props: true,
     },
+    {
+        path: "/user/profile",
+        name: "userProfile",
+        component: TheUserProfile,
+    },
 ];
 
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
     routes,
+});
+
+// eslint-disable-next-line no-unused-vars
+router.beforeEach(async (to, from) => {
+    const isAuthenticated = store.state.isLoggedIn;
+    console.log(isAuthenticated);
+    if (!isAuthenticated && to.name == "userProfile") {
+        return { name: "login" };
+    }
 });
 
 export default router;
