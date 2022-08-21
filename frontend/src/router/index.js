@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import LandingPage from "../components/LandingPage.vue";
 import TheLoginForm from "../components/TheLoginForm.vue";
 import TheSignupForm from "../components/TheSignupForm.vue";
-
+import ThePostViewer from "../components/ThePostViewer.vue";
 const routes = [
     {
         path: "/",
@@ -18,6 +18,12 @@ const routes = [
         path: "/auth/signup",
         name: "signup",
         component: TheSignupForm,
+    },
+    {
+        path: "/posts/read/:slug",
+        name: "readpost",
+        component: ThePostViewer,
+        props: true,
     },
 ];
 
