@@ -61,7 +61,8 @@ router.beforeEach(async (to, from) => {
     if (to.name == "logout") {
         axios.get(`${process.env.VUE_APP_BACKEND_BASE_URL}/user/logout`);
         store.commit("makeLogout");
-        return { name: "home" };
+        window.location.replace("/");
+        //return { name: "home" };
     }
 });
 
