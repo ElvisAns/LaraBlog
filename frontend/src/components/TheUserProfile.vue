@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row">
-            <article class="col-md-8 offset-md-2 mt-5" ref="blog_container">
+            <article class="col-md-8 offset-md-2 mt-5">
                 <div>
                     <div class="cover-container">
                         <img
@@ -15,7 +15,7 @@
                     <h1 class="user-name">{{ user.name }}</h1>
                     <div class="text-secondary">
                         Joigned on
-                        <time :datetime="blog.created_at">
+                        <time :datetime="user.created_at">
                             <i class="bi bi-clock"></i>
                             {{ format_date(user.created_at) }}
                         </time>
@@ -23,7 +23,7 @@
 
                     <div class="text-secondary">
                         contact
-                        <time :datetime="blog.created_at">
+                        <time :datetime="user.created_at">
                             <i class="bi bi-enveloppe"></i>
                             {{ user.email }}
                         </time>
@@ -84,5 +84,8 @@ export default {
 }
 .user-avatar {
     font-size: 90px;
+    display: block;
+    position: relative;
+    top: -50px;
 }
 </style>
