@@ -44,6 +44,7 @@ export default {
         return {
             blogs: null,
             card_class: "",
+            first_render: true,
         };
     },
     methods: {
@@ -66,9 +67,10 @@ export default {
                         this.blogs = request.data;
                     }, 1000);
                     setTimeout(() => {
-                        this.card_class = "animate__animated animate__shakeX";
-                        this.scrollToRef("posts");
-                    }, 2000);
+                        this.card_class = "animate__animated animate__fadeIn";
+                        if (!this.first_render) this.scrollToRef("posts");
+                        this.first_render = false;
+                    }, 1500);
                 });
         } else {
             this.axios
@@ -78,9 +80,10 @@ export default {
                         this.blogs = request.data;
                     }, 1000);
                     setTimeout(() => {
-                        this.card_class = "animate__animated animate__shakeX";
-                        this.scrollToRef("posts");
-                    }, 2000);
+                        this.card_class = "animate__animated animate__fadeIn";
+                        if (!this.first_render) this.scrollToRef("posts");
+                        this.first_render = false;
+                    }, 1500);
                 });
         }
     },
