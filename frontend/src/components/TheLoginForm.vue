@@ -32,7 +32,7 @@
                                 required
                             />
                             <div class="invalid-feedback">
-                                {{ error.email }}
+                                invalid email address
                             </div>
                         </div>
                     </div>
@@ -54,10 +54,9 @@
                                 id="validationCustomUsername"
                                 aria-describedby="inputGroupPrepend"
                                 required
+                                min-length="5"
                             />
-                            <div class="invalid-feedback">
-                                {{ error.password }}
-                            </div>
+                            <div class="invalid-feedback">invalid password</div>
                         </div>
                     </div>
                     <div class="col-12">
@@ -76,10 +75,32 @@ export default {
     name: "TheLoginForm",
     data() {
         return {
-            error: {},
             email: "",
             password: "",
         };
+    },
+    mounted() {
+        var forms = document.querySelectorAll(".needs-validation");
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms).forEach(function (form) {
+            form.addEventListener(
+                "submit",
+                function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+
+                    form.classList.add("was-validated");
+                },
+                false
+            );
+        });
+    },
+    methods: {
+        login(event) {
+            event.preventDefault();
+        },
     },
 };
 </script>
