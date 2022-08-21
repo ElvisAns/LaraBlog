@@ -11,6 +11,7 @@
                     class="row g-3 needs-validation mt-3"
                     @submit="login"
                     novalidate
+                    ref="formContainer"
                 >
                     <div class="col-md-12">
                         <label for="validationCustomUsername" class="form-label"
@@ -27,7 +28,6 @@
                                 placeholder="johndoe@gmail.com"
                                 type="text"
                                 class="form-control"
-                                id="validationCustomUsername"
                                 aria-describedby="inputGroupPrepend"
                                 required
                             />
@@ -51,7 +51,6 @@
                                 placeholder=""
                                 type="password"
                                 class="form-control"
-                                id="validationCustomUsername"
                                 aria-describedby="inputGroupPrepend"
                                 required
                                 min-length="5"
@@ -60,7 +59,11 @@
                         </div>
                     </div>
                     <div class="col-12">
-                        <button class="btn btn-success" type="submit">
+                        <button
+                            class="btn btn-success"
+                            :disabled="submit_disabled"
+                            type="submit"
+                        >
                             Let me in! <i class="bi bi-box-arrow-right"></i>
                         </button>
                     </div>
@@ -77,6 +80,8 @@ export default {
         return {
             email: "",
             password: "",
+            fullPage: false,
+            submit_disabled: false,
         };
     },
     mounted() {
@@ -100,6 +105,19 @@ export default {
     methods: {
         login(event) {
             event.preventDefault();
+            console.log("here we go");
+            this.submit_disabled = true;
+            let loader = this.$loading.show({
+                // Optional parameters
+                container: this.fullPage ? null : this.$refs.formContainer,
+                canCancel: false,
+                onCancel: this.onCancel,
+            });
+
+            setTimeout(() => {
+                loader.hide();
+                this.submit_disabled = false;
+            }, 3000);
         },
     },
 };
