@@ -11,6 +11,10 @@ export default createStore({
             state.isLoggedIn = true;
             state.user = userData;
         },
+        makeLogout(state) {
+            state.isLoggedIn = false;
+            state.user = {};
+        },
     },
     actions: {},
     modules: {},
