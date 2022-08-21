@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="row">
+        <div class="row" ref="posts">
             <div class="col-12 loading-posts" v-show="!blogs">
                 <div class="">
                     <div class="spinner-border" role="status"></div>
@@ -10,6 +10,7 @@
                 v-for="blog in blogs"
                 class="col-lg-4 col-md-12"
                 :key="blog.id"
+                :class="card_class"
             >
                 <div class="card m-4 mx-auto shadow-lg" style="width: 18rem">
                     <img :src="blog.image_url" class="card-img-top" alt="..." />
@@ -42,20 +43,44 @@ export default {
     data() {
         return {
             blogs: null,
+            card_class: "",
         };
+    },
+    methods: {
+        scrollToRef(refName) {
+            var element = this.$refs[refName];
+            var top = element.offsetTop;
+            window.scrollTo({
+                lef: 0,
+                top: top,
+                behavior: "smooth",
+            });
+        },
     },
     mounted() {
         if (this.onlySample) {
             this.axios
                 .get(`http://127.0.0.1:8000/api/posts/3`)
                 .then((request) => {
-                    this.blogs = request.data;
+                    setTimeout(() => {
+                        this.blogs = request.data;
+                    }, 1000);
+                    setTimeout(() => {
+                        this.card_class = "animate__animated animate__shakeX";
+                        this.scrollToRef("posts");
+                    }, 2000);
                 });
         } else {
             this.axios
                 .get(`http://127.0.0.1:8000/api/posts/`)
                 .then((request) => {
-                    this.blogs = request.data;
+                    setTimeout(() => {
+                        this.blogs = request.data;
+                    }, 1000);
+                    setTimeout(() => {
+                        this.card_class = "animate__animated animate__shakeX";
+                        this.scrollToRef("posts");
+                    }, 2000);
                 });
         }
     },
