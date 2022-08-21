@@ -35,7 +35,7 @@ const routes = [
         component: TheUserProfile,
     },
     {
-        path: "auth/logout",
+        path: "/auth/logout",
         name: "logout",
     },
 ];
