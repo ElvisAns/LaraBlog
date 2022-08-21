@@ -17,13 +17,26 @@
                     </div>
                     <h1 class="post-title">{{ blog.title }}</h1>
                     <div class="text-secondary">
-                        <time :datetime="blog.created_at">{{
-                            format_date(blog.created_at)
-                        }}</time>
-                        | {{ comment_number }} comment(s)
+                        <time :datetime="blog.created_at">
+                            <i class="bi bi-clock"></i>
+                            {{ format_date(blog.created_at) }}
+                        </time>
+                        | {{ comment_number }}
+                        <i class="bi bi-chat"></i> comment(s)
                     </div>
                     <div class="blog-content">
                         {{ blog.content }}
+                    </div>
+                    <div class="text-left">
+                        <router-link
+                            class="btn btn-success"
+                            aria-current="page"
+                            to="/"
+                            slots="button"
+                        >
+                            <i class="bi bi-box-arrow-in-left"></i>
+                            Get back home
+                        </router-link>
                     </div>
                 </div>
             </article>
