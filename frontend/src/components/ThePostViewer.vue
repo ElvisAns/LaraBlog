@@ -5,7 +5,9 @@
                 class="col-md-8 offset-md-2 mt-5 bg-dark"
                 :ref="blog_container"
             >
-                {{ slug }}
+            <div v-show="data_fetched">
+                <h1>{{ post.title }}</h1>
+            </div>
             </article>
         </div>
     </div>
@@ -20,7 +22,12 @@ export default {
             type: String,
         },
     },
-    
+    data() {
+        return {
+            post: {},
+            data_fetched:false,
+        };
+    },
     mounted() {
         let loader = this.$loading.show({
             container: this.$ref.blog_container,
@@ -32,6 +39,7 @@ export default {
                 `${process.env.VUE_APP_BACKEND_BASE_URL}/post/read/${this.slug}`
             )
             .then((res) => {
+                this.post = res.data;
                 setTimeout(() => {
                     loader.hide();
                 }, 1000);
