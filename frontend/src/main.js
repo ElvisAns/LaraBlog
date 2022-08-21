@@ -8,5 +8,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "animate.css";
 import axios from "axios";
 import VueAxios from "vue-axios";
+import VueLoading from "vue-loading-overlay";
 
-createApp(App).use(store).use(router).use(VueAxios, axios).mount("#app");
+createApp(App)
+    .use(store)
+    .use(router)
+    .use(VueAxios, axios)
+    .use(VueLoading)
+    .mount("#app");
