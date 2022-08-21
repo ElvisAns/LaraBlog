@@ -14,7 +14,7 @@
                     </div>
                     <h1 class="user-name">{{ user.name }}</h1>
                     <div class="text-secondary">
-                        Joigned on
+                        <strong>Joigned on </strong>
                         <time :datetime="user.created_at">
                             <i class="bi bi-clock"></i>
                             {{ format_date(user.created_at) }}
@@ -22,15 +22,44 @@
                     </div>
 
                     <div class="text-secondary">
-                        contact
                         <time :datetime="user.created_at">
-                            <i class="bi bi-enveloppe"></i>
+                            <i class="bi bi-envelope"></i>
                             {{ user.email }}
                         </time>
                     </div>
 
                     @openModal to create a new post
-                    <div class="blog-crud">@Table with crud operation</div>
+                    <h3 class="my-2">
+                        Here is the list of current published blogs
+                    </h3>
+                    <div class="blog-crud table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">title</th>
+                                    <th scope="col">caption</th>
+                                    <th scope="col">action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="blog in blogs" :key="blog.id">
+                                    <th scope="row">{{ blog.id }}</th>
+                                    <td>{{ blog.title }}</td>
+                                    <td>{{ blog.caption }}</td>
+                                    <td>
+                                        <button class="btn btn-success my-1">
+                                            Edit
+                                        </button>
+                                        <br />
+                                        <button class="btn btn-danger my-1">
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <div class="text-left">
                         <router-link
                             class="btn btn-success"
@@ -62,6 +91,9 @@ export default {
             user: this.$store.state.user,
         };
     },
+    mounted(){
+        
+    }
 };
 </script>
 <style scoped>
