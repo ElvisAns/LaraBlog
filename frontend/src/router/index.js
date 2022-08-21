@@ -42,9 +42,15 @@ const router = createRouter({
 // eslint-disable-next-line no-unused-vars
 router.beforeEach(async (to, from) => {
     const isAuthenticated = store.state.isLoggedIn;
-    console.log(isAuthenticated);
     if (!isAuthenticated && to.name == "userProfile") {
         return { name: "login" };
+    }
+    if (
+        isAuthenticated &&
+        (to.name == "login" || to.name == "signup") &&
+        to.name !== "userProfile"
+    ) {
+        return { name: "userProfile" };
     }
 });
 
