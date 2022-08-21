@@ -3,7 +3,7 @@
     <div class="landing">
         <div class="container">
             <div class="row">
-                <div class="col-12">
+                <div class="col-12" :class="animation_main">
                     <div class="text-white">
                         <h1>Welcome To Our official Blog</h1>
                         <button class="btn btn-success btn-space">GET STARTED</button>
@@ -47,7 +47,11 @@ export default {
             isSample: true,
             keyComp: 1,
             buttonText: "See All posts",
+            animation_main: "",
         };
+    },
+    created() {
+        this.animation_main = "animate__animated animate__bounceIn";
     },
     methods: {
         toggleSample() {
@@ -86,6 +90,8 @@ export default {
 .fancy {
     -webkit-text-decoration: rgb(134, 134, 134) double underline;
     text-decoration: rgb(134, 134, 134) double underline;
+    font-weight: bolder;
+    letter-spacing: 2px;
 }
 .load {
     width: 200px;
