@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import LandingPage from "../components/LandingPage.vue";
 import TheLoginForm from "../components/TheLoginForm.vue";
+import TheSignupForm from "../components/TheSignupForm.vue";
 
 const routes = [
     {
@@ -12,6 +13,11 @@ const routes = [
         path: "/auth/login",
         name: "login",
         component: TheLoginForm,
+    },
+    {
+        path: "/auth/signup",
+        name: "signup",
+        component: TheSignupForm,
     },
 ];
 

@@ -103,7 +103,7 @@
                                 :class="passwordCheckValidate"
                             />
                             <div class="invalid-feedback">
-                                password don't match
+                                invalid confirm password
                             </div>
                         </div>
                     </div>
@@ -161,7 +161,8 @@ export default {
                     this.password.length > 5 ? "is-valid" : "is-invalid";
 
                 this.passwordCheckValidate =
-                    this.password !== this.passwordCheck
+                    (this.passwordValidate == "is-valid") &
+                    (this.password == this.passwordCheck)
                         ? "is-valid"
                         : "is-invalid";
                 this.nameValidate = namePattern.test(this.name)
