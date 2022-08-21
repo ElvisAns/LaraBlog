@@ -8,7 +8,7 @@
                 login
             </router-link>
             <router-link
-                to="/auth/signin"
+                to="/auth/signup"
                 class="btn btn-light mx-1 btn-md px-4"
             >
                 register

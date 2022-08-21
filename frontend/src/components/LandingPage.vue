@@ -7,7 +7,7 @@
                     <div class="text-white">
                         <h1>Welcome To Our official Blog</h1>
                         <router-link
-                            to="/auth/signin"
+                            to="/auth/signup"
                             tag="button"
                             class="btn btn-success btn-space"
                         >
