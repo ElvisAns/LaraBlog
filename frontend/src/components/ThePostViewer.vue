@@ -15,7 +15,13 @@
                     <div class="caption_container">
                         <img :src="blog.image_url" class="post-caption" />
                     </div>
-                    <h1>{{ blog.title }}</h1>
+                    <h1 class="post-title">{{ blog.title }}</h1>
+                    <div class="text-secondary">
+                        <time :datetime="blog.created_at">{{
+                            format_date(blog.created_at)
+                        }}</time>
+                        | {{ comment_number }} comment(s)
+                    </div>
                 </div>
             </article>
         </div>
@@ -31,11 +37,18 @@ export default {
             type: String,
         },
     },
+    methods: {
+        format_date(Unformateddate) {
+            const d = new Date(Unformateddate);
+            return d.toLocaleString();
+        },
+    },
     data() {
         return {
             blog: {},
             data_fetched: false,
             error: "",
+            comment_number: 0,
         };
     },
     mounted() {
@@ -50,7 +63,7 @@ export default {
             )
             .then((res) => {
                 this.blog = res.data.post;
-                console.log(res.data.post);
+                this.comment_number = res.data.comments;
                 this.data_fetched = true;
                 setTimeout(() => {
                     loader.hide();
@@ -68,3 +81,18 @@ export default {
     },
 };
 </script>
+<style scoped>
+.caption_container {
+    max-height: 220px;
+    overflow: hidden;
+    width: 100%;
+    margin: 10px 0px;
+}
+.post-caption {
+    width: 100%;
+}
+.post-title {
+    font-weight: 900;
+    font-size: 2em;
+}
+</style>
