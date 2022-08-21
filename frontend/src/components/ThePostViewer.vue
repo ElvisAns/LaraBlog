@@ -22,6 +22,9 @@
                         }}</time>
                         | {{ comment_number }} comment(s)
                     </div>
+                    <div class="blog-content">
+                        {{ blog.content }}
+                    </div>
                 </div>
             </article>
         </div>
