@@ -4,9 +4,14 @@
             <article class="col-md-8 offset-md-2 mt-5" ref="blog_container">
                 <div>
                     <div class="cover-container">
-                        <img src="https://static.vecteezy.com/system/resources/previews/001/589/630/original/green-background-with-fading-square-and-dots-free-vector.jpg" class="cover-image" />
+                        <img
+                            src="https://static.vecteezy.com/system/resources/previews/001/589/630/original/green-background-with-fading-square-and-dots-free-vector.jpg"
+                            class="cover-image"
+                        />
                     </div>
-                    <div class="user-avatar"><i class="bi bi-person-circle"></i></div>
+                    <div class="user-avatar">
+                        <i class="bi bi-person-circle"></i>
+                    </div>
                     <h1 class="user-name">{{ user.name }}</h1>
                     <div class="text-secondary">
                         Joigned on
@@ -25,9 +30,7 @@
                     </div>
 
                     @openModal to create a new post
-                    <div class="blog-content">
-                        @Table with crud operation
-                    </div>
+                    <div class="blog-crud">@Table with crud operation</div>
                     <div class="text-left">
                         <router-link
                             class="btn btn-success"
@@ -68,7 +71,7 @@ export default {
     width: 100%;
     margin: 10px 0px;
 }
-.cover-image{
+.cover-image {
     width: 100%;
 }
 .user-name {
