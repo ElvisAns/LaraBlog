@@ -7,7 +7,11 @@
                 <p class="small">
                     Welcome again!<br />Please login into your account
                 </p>
-                <form class="row g-3 needs-validation mt-3" novalidate>
+                <form
+                    class="row g-3 needs-validation mt-3"
+                    @submit="login"
+                    novalidate
+                >
                     <div class="col-md-12">
                         <label for="validationCustomUsername" class="form-label"
                             >Email</label
@@ -19,6 +23,7 @@
                                 ><i class="bi bi-envelope-fill"></i
                             ></span>
                             <input
+                                v-model="email"
                                 placeholder="johndoe@gmail.com"
                                 type="text"
                                 class="form-control"
@@ -42,6 +47,7 @@
                                 ><i class="bi bi-key"></i
                             ></span>
                             <input
+                                v-model="password"
                                 placeholder=""
                                 type="password"
                                 class="form-control"
@@ -71,6 +77,8 @@ export default {
     data() {
         return {
             error: {},
+            email: "",
+            password: "",
         };
     },
 };
