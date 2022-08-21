@@ -1,9 +1,13 @@
 <template>
     <div class="container">
         <div class="row">
-            <div class="col-md-4 offset-md-4 p-4">
+            <div class="col-md-4 offset-md-4 p-2">
                 <img src="@/assets/logo.png" class="logo" />
-                <form class="row g-3 needs-validation mt-5" novalidate>
+                <h1 class="h-login">Welcome!</h1>
+                <p class="small">
+                    Welcome again!<br />Please login into your account
+                </p>
+                <form class="row g-3 needs-validation mt-3" novalidate>
                     <div class="col-md-12">
                         <label for="validationCustomUsername" class="form-label"
                             >Email</label
@@ -115,5 +119,12 @@ export default {
 <style scoped>
 .logo {
     height: 40px;
+}
+.h-login {
+    font-family: "Dancing Script", cursive;
+    font-size: 3em;
+}
+p.small {
+    color: #157347;
 }
 </style>
