@@ -57,7 +57,7 @@
                                         </router-link>
                                     </li>
                                 </ul>
-                                <TheUserManager :userIsLoggedIn="false" />
+                                <TheUserManager />
                             </div>
                         </div>
                     </nav>
@@ -73,6 +73,11 @@ export default {
     name: "TheNavBar",
     components: {
         TheUserManager,
+    },
+    data() {
+        return {
+            logginState: this.$store.state.isLoggedIn,
+        };
     },
 };
 </script>

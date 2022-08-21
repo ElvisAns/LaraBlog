@@ -5,7 +5,14 @@ export default createStore({
         user: {},
         isLoggedIn: false,
     },
-    getters: {},
+    getters: {
+        getUser: (state) => {
+            return state.user;
+        },
+        getUserLoginState: (state) => {
+            return state.isLoggedIn;
+        },
+    },
     mutations: {
         makeLogin(state, userData) {
             state.isLoggedIn = true;

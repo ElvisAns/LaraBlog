@@ -36,19 +36,18 @@
 <script>
 export default {
     name: "TheUserManager",
-    props: {
-        userIsLoggedIn: {
-            required: true,
-            type: Boolean,
-            default: false,
-        },
+    data() {
+        return {
+            userIsLoggedIn: this.$store.getters.getUserLoginState,
+            user: this.$store.getters.getUser,
+        };
     },
     computed: {
         getName() {
-            if (!Object.keys(this.$store.state.user).length) {
+            if (!Object.keys(this.user).length) {
                 return "";
             } else {
-                return this.$store.state.user.name;
+                return this.user.name;
             }
         },
     },
