@@ -202,6 +202,15 @@
                                         >
                                             Delete
                                         </button>
+                                        <br />
+                                        <router-link
+                                            :to="
+                                                '/posts/read/' +
+                                                blog.title.replace(/ /g, '-')
+                                            "
+                                        >
+                                            View post
+                                        </router-link>
                                     </td>
                                 </tr>
                             </tbody>
