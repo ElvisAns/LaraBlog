@@ -314,7 +314,7 @@ export default {
             if (id == -1) {
                 this.operation = "create";
             } else {
-                this.operation = "edit";
+                this.operation = action;
                 this.currID = id;
             }
         },
