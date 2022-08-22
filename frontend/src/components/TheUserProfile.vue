@@ -1,4 +1,78 @@
 <template>
+    <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        data-bs-backdrop="static"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+    >
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLabel">
+                        Post Action - {{ get_title }}
+                    </h5>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    ></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="col-form-label">Title:</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                v-model="title"
+                            />
+                        </div>
+                        <div class="mb-3">
+                            <label class="col-form-label">Caption:</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                v-model="caption"
+                            />
+                        </div>
+                        <div class="mb-3">
+                            <label class="col-form-label"
+                                >Illustration image URL:</label
+                            >
+                            <input
+                                type="text"
+                                class="form-control"
+                                v-model="image_url"
+                            />
+                        </div>
+                        <div class="mb-3">
+                            <label for="text" class="col-form-label"
+                                >Content:</label
+                            >
+                            <textarea
+                                v-model="content"
+                                class="form-control"
+                                id="text"
+                            ></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                    >
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <div class="row">
             <article class="col-md-8 offset-md-2 mt-5">
@@ -37,6 +111,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
+                                    <th scole="col">Edited on</th>
                                     <th scope="col">title</th>
                                     <th scope="col">caption</th>
                                     <th scope="col">action</th>
@@ -45,14 +120,29 @@
                             <tbody>
                                 <tr v-for="blog in blogs" :key="blog.id">
                                     <th scope="row">{{ blog.id }}</th>
+                                    <td>{{ format_date(blog.updated_at) }}</td>
                                     <td>{{ blog.title }}</td>
                                     <td>{{ blog.caption }}</td>
                                     <td>
-                                        <button class="btn btn-success my-1">
+                                        <button
+                                            @click="
+                                                set_current('edit', blog.id)
+                                            "
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal"
+                                            class="btn btn-success my-1"
+                                        >
                                             Edit
                                         </button>
                                         <br />
-                                        <button class="btn btn-danger my-1">
+                                        <button
+                                            @click="
+                                                set_current('delete', blog.id)
+                                            "
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal"
+                                            class="btn btn-danger my-1"
+                                        >
                                             Delete
                                         </button>
                                     </td>
@@ -85,15 +175,41 @@ export default {
             const d = new Date(Unformateddate);
             return d.toLocaleString();
         },
+        set_current(action, id) {
+            if (!id) {
+                this.operation = "create";
+            } else {
+                this.operation = "edit";
+                this.currID = id;
+            }
+        },
     },
     data() {
         return {
             user: this.$store.state.user,
+            blogs: [],
+            operation: "edit",
+            currID: -1,
+            title: "",
+            caption: "",
+            content: "",
+            image_url: "",
         };
     },
-    mounted(){
-        
-    }
+    mounted() {
+        this.axios
+            .get(`${process.env.VUE_APP_BACKEND_BASE_URL}/posts`)
+            .then((res) => {
+                this.blogs = res.data;
+            });
+    },
+    computed: {
+        get_title() {
+            return this.operation == "edit"
+                ? `Edit # ${this.currID}`
+                : "Create";
+        },
+    },
 };
 </script>
 <style scoped>
@@ -119,5 +235,8 @@ export default {
     display: block;
     position: relative;
     top: -50px;
+}
+.table-responsive {
+    text-align: left;
 }
 </style>
