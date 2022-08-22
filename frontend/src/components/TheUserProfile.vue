@@ -1,10 +1,45 @@
 <template>
     <div
-        class="modal fade"
-        id="exampleModal"
+        class="modal"
+        id="confirm_deletion"
         tabindex="-1"
         data-bs-backdrop="static"
-        aria-labelledby="exampleModalLabel"
+        aria-labelledby="confirm_deletion"
+        aria-hidden="true"
+    >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Are you sure</h5>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    ></button>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                    >
+                        cancel
+                    </button>
+                    <button type="button" class="btn btn-danger">
+                        Yes, delete the post
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div
+        class="modal fade"
+        id="edit_create_modal"
+        tabindex="-1"
+        data-bs-backdrop="static"
+        aria-labelledby="edit_create_modalLabel"
         aria-hidden="true"
     >
         <div class="modal-dialog modal-dialog-scrollable">
@@ -114,7 +149,7 @@
                         <button
                             @click="set_current('create', -1)"
                             data-bs-toggle="modal"
-                            data-bs-target="#exampleModal"
+                            data-bs-target="#edit_create_modal"
                             class="btn btn-success my-1"
                         >
                             Create a new post
@@ -146,7 +181,7 @@
                                                 set_current('edit', blog.id)
                                             "
                                             data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal"
+                                            data-bs-target="#edit_create_modal"
                                             class="btn btn-success my-1"
                                         >
                                             Edit
@@ -157,7 +192,7 @@
                                                 set_current('delete', blog.id)
                                             "
                                             data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal"
+                                            data-bs-target="#confirm_deletion"
                                             class="btn btn-danger my-1"
                                         >
                                             Delete
