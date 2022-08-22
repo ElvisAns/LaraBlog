@@ -35,9 +35,10 @@ export default {
         TheNavbar,
         TheFooter,
     },
-    beforeCreate() {
+    beforeMount() {
         if (this.$cookies.get("session_info")) {
-            
+            const cookie = this.$cookies.get("session_info");
+            this.$store.commit("makeLogin", cookie.user_info);
         }
     },
 };
