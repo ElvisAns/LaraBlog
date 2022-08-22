@@ -35,5 +35,10 @@ export default {
         TheNavbar,
         TheFooter,
     },
+    beforeCreate() {
+        if (this.$cookies.get("session_info")) {
+            
+        }
+    },
 };
 </script>
