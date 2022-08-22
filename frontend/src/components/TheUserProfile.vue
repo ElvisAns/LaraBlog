@@ -102,7 +102,16 @@
                         </time>
                     </div>
 
-                    @openModal to create a new post
+                    <div>
+                        <button
+                            @click="set_current('create', -1)"
+                            data-bs-toggle="modal"
+                            data-bs-target="#exampleModal"
+                            class="btn btn-success my-1"
+                        >
+                            Create a new post
+                        </button>
+                    </div>
                     <h3 class="my-2">
                         Here is the list of current published blogs
                     </h3>
@@ -176,7 +185,7 @@ export default {
             return d.toLocaleString();
         },
         set_current(action, id) {
-            if (!id) {
+            if (id == -1) {
                 this.operation = "create";
             } else {
                 this.operation = "edit";
@@ -195,6 +204,16 @@ export default {
             content: "",
             image_url: "",
         };
+    },
+    watch: {
+        currID(old, new_id) {
+            console.log(new_id);
+            if (new_id !== -1) {
+                this.title = this.blogs[new_id].title;
+            } else {
+                this.title = "";
+            }
+        },
     },
     mounted() {
         this.axios
