@@ -69,7 +69,14 @@
                     >
                         Close
                     </button>
-                    <button type="button" class="btn btn-primary">Save</button>
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        ref="saveButton"
+                        @click="save"
+                    >
+                        Save
+                    </button>
                 </div>
             </div>
         </div>
@@ -178,9 +185,92 @@
 </template>
 
 <script>
+import { useToast } from "vue-toastification";
 export default {
     name: "TheUserProfile",
     methods: {
+        save() {
+            const toast = useToast();
+            const url_pattern =
+                /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w.-]+)+[\w\-._~:/?#[\]@!$&'()*+,;=.]+$/;
+            if (
+                this.title.length < 5 ||
+                !url_pattern.test(this.image_url) ||
+                this.caption.length < 15 ||
+                this.content.length < 20
+            ) {
+                toast.warning(
+                    "You have entered incorrect datas! please make sure you fill the form with the right datas"
+                );
+                return;
+            }
+            const load = this.$loading.show({
+                container: this.$refs.saveButton,
+                canCancel: false,
+                height: "20px",
+            });
+            if (this.operation == "edit") {
+                this.axios
+                    .post(
+                        `${process.env.VUE_APP_BACKEND_BASE_URL}/posts/update/${this.currID}`,
+                        {
+                            title: this.title,
+                            caption: this.caption,
+                            image_url: this.image_url,
+                            content: this.content,
+                        }
+                    )
+                    .then(() => {
+                        toast.success("Post updated with success");
+                    })
+                    .catch(() => {
+                        toast.error(
+                            "Error updating the post, please check your informatons"
+                        );
+                    })
+                    .finally(() => {
+                        this.axios
+                            .get(
+                                `${process.env.VUE_APP_BACKEND_BASE_URL}/posts`
+                            )
+                            .then((res) => {
+                                this.blogs = res.data;
+                            });
+                        load.hide();
+                    });
+            } else {
+                this.axios
+                    .post(
+                        `${process.env.VUE_APP_BACKEND_BASE_URL}/posts/create`,
+                        {
+                            title: this.title,
+                            caption: this.caption,
+                            image_url: this.image_url,
+                            content: this.content,
+                            category: 1,
+                            user_id: this.user.id,
+                        }
+                    )
+                    .then(() => {
+                        toast.success("Post created with success");
+                    })
+                    .catch(() => {
+                        toast.error(
+                            "Error creating the post, please check your informatons"
+                        );
+                    })
+                    .finally(() => {
+                        this.axios
+                            .get(
+                                `${process.env.VUE_APP_BACKEND_BASE_URL}/posts`
+                            )
+                            .then((res) => {
+                                this.blogs = res.data;
+                            });
+                        load.hide();
+                    });
+            }
+        },
         format_date(Unformateddate) {
             const d = new Date(Unformateddate);
             return d.toLocaleString();
