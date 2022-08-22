@@ -12,6 +12,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title">Are you sure?</h5>
                     <button
+                        ref="close_delete_modal"
                         type="button"
                         class="btn-close"
                         data-bs-dismiss="modal"
@@ -26,8 +27,12 @@
                     >
                         cancel
                     </button>
-                    <button type="button" class="btn btn-danger">
-                        Yes, delete the post
+                    <button
+                        type="button"
+                        class="btn btn-danger"
+                        @click="delete_post"
+                    >
+                        Yes, delete the post N {{ currID }}
                     </button>
                 </div>
             </div>
@@ -224,6 +229,27 @@ import { useToast } from "vue-toastification";
 export default {
     name: "TheUserProfile",
     methods: {
+        delete_post() {
+            const toast = useToast();
+            this.axios
+                .get(
+                    `${process.env.VUE_APP_BACKEND_BASE_URL}/posts/delete/${this.currID}`
+                )
+                .then(() => {
+                    toast.success("Deleted");
+                })
+                .catch(() => {
+                    toast.error("Error occuring, try again!");
+                })
+                .finally(() => {
+                    this.$refs.close_delete_modal.click();
+                    this.axios
+                        .get(`${process.env.VUE_APP_BACKEND_BASE_URL}/posts`)
+                        .then((res) => {
+                            this.blogs = res.data;
+                        });
+                });
+        },
         save() {
             const toast = useToast();
             const url_pattern =
