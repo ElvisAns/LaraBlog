@@ -138,6 +138,8 @@ Bingo!!!
 If you did not change any configuration about urls you can access the website at **http://localhost:8080/** 
 
 Enjoy!
+
+
 ![image](https://user-images.githubusercontent.com/35831811/186032058-27a4e1e7-703e-4f53-bcfd-e4e49a572327.png)
 
 
@@ -173,7 +175,7 @@ There are still some functionalities that we are planning to implement soon:
 
 ## Contributing
 
-if you answered `YES!` come and join me building this amazing blog website building chill :-)
+if you answered `YES!` come and join me building amazing blog website :-)
 
 Feel free to fork the repo, report any bug, propose a feature so  we make it better!
 
