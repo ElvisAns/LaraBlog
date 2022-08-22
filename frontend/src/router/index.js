@@ -5,7 +5,6 @@ import TheSignupForm from "../components/TheSignupForm.vue";
 import ThePostViewer from "../components/ThePostViewer.vue";
 import TheUserProfile from "../components/TheUserProfile.vue";
 import store from "@/store";
-import vue from "vue";
 
 const routes = [
     {
