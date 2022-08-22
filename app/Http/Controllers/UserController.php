@@ -24,6 +24,17 @@ class UserController extends Controller
     }
 
     public function create(Request $request){
+        
+        $validate = Validator::make($request->all(),[
+            'email' => 'required|email',
+            'password' => 'required',
+            'name' => 'required',
+        ]);
+    
+        if($validate->fails()){
+            return response($validate->errors(),400);
+        }
+
         $user = new User();
         $post->name=$request->input('name');
         $post->email=$request->input('email');
