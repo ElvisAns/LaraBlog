@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
-
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
