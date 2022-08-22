@@ -30,4 +30,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/users/list/all',[UserController::class,'all']);
 });
 
+Route::post('/user/create',[UserController::class,'create']);
+
 
