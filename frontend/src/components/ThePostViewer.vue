@@ -24,9 +24,7 @@
                         | {{ comment_number }}
                         <i class="bi bi-chat"></i> comment(s)
                     </div>
-                    <div class="blog-content">
-                        {{ blog.content }}
-                    </div>
+                    <div class="blog-content" v-html="blog.content"></div>
                     <div class="text-left">
                         <router-link
                             class="btn btn-success"
