@@ -36,13 +36,13 @@ class UserController extends Controller
         }
 
         $user = new User();
-        $post->name=$request->input('name');
-        $post->email=$request->input('email');
-        $post->password=Hash::make($request->input('password'));
-        $post->created_at=Carbon::now()->timestamp;
-        $post->updated_at=Carbon::now()->timestamp;
+        $user->name=$request->input('name');
+        $user->email=$request->input('email');
+        $user->password=Hash::make($request->input('password'));
+        $user->created_at=Carbon::now()->timestamp;
+        $user->updated_at=Carbon::now()->timestamp;
         try{
-            $post->save();
+            $user->save();
             return ['reponse'=>'User Created'];
         }
         catch(\Exception $e)
