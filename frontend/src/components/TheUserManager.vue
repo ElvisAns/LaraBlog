@@ -18,12 +18,12 @@
         </div>
         <div v-show="userIsLoggedIn">
             <div class="d-flex mx-auto justify-content-center">
-                <router-link
-                    to="/auth/logout"
+                <button
+                    @click="logout"
                     class="btn btn-success mx-1 btn-md px-4"
                 >
                     logout
-                </router-link>
+                </button>
                 <router-link
                     to="/user/profile"
                     class="btn btn-light mx-1 btn-md px-4"
@@ -51,6 +51,13 @@ export default {
             } else {
                 return this.user.name;
             }
+        },
+    },
+    methods: {
+        logout() {
+            this.$store.commit("makeLogout");
+            this.$cookies.remove("session_info");
+            window.location.replace("/");
         },
     },
 };
