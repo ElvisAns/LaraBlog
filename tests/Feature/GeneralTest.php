@@ -5,6 +5,8 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class GeneralTest extends TestCase
 {
@@ -14,6 +16,10 @@ class GeneralTest extends TestCase
      * @return void
      */
     use RefreshDatabase;
+
+    public function __construct(){
+        $this->seed(); #always seed database when runing tests
+    }
 
     public function test_token_are_only_issued_to_trusted_users()
     {
@@ -27,9 +33,11 @@ class GeneralTest extends TestCase
         $response->assertStatus(400);
     }
 
-    public function test_user_can_login()
-    {
-        $this->assertTrue(true);
+    public function test_user_get_token_with_right_credential()
+    { #on seeding, password are set to be 12345678
+        $user = DB::table('users')->latest('id')->first();
+        $response = $this->post('/api/sanctum/token',['email'=>$user->email,"password"=>"12345678","device_name"=>"default"]);
+        $response->assertStatus(200);
     }
 
     public function test_user_cannot_signup_with_invalid_email()
@@ -39,7 +47,7 @@ class GeneralTest extends TestCase
     }
 
     public function test_posts_can_be_listed_without_login(){
-        $this->assertTrue(true);
+        $response = $this->get('/api/posts');
     }
 
     public function test_unauthorized_users_cannot_edit_post(){
