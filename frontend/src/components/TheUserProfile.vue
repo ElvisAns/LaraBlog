@@ -206,10 +206,11 @@ export default {
         };
     },
     watch: {
-        currID(old, new_id) {
+        currID(new_id) {
             console.log(new_id);
             if (new_id !== -1) {
-                this.title = this.blogs[new_id].title;
+                const blog = this.blogs.find((blog) => blog.id == new_id);
+                this.title = blog.title;
             } else {
                 this.title = "";
             }
