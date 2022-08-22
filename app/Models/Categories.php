@@ -19,6 +19,6 @@ class Categories extends Model
     ];
 
     public function posts(){
-        return $this->hasMany(Posts::class)
+        return $this->hasMany(Posts::class);
     }
 }
