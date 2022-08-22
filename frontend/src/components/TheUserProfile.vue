@@ -206,13 +206,26 @@ export default {
         };
     },
     watch: {
+        operation(newOps) {
+            if (newOps == "create") {
+                this.title = "";
+                this.image_url = "";
+                this.content = "";
+                this.caption = "";
+            }
+        },
         currID(new_id) {
-            console.log(new_id);
             if (new_id !== -1) {
                 const blog = this.blogs.find((blog) => blog.id == new_id);
                 this.title = blog.title;
+                this.image_url = blog.image_url;
+                this.content = blog.content;
+                this.caption = blog.caption;
             } else {
                 this.title = "";
+                this.image_url = "";
+                this.content = "";
+                this.caption = "";
             }
         },
     },
