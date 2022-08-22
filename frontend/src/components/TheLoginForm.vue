@@ -111,20 +111,17 @@ export default {
             });
 
             this.axios
-                .post(
-                    `${process.env.VUE_APP_BACKEND_BASE_URL}/login`,
-                    {
-                        email: this.email,
-                        password: this.password,
-                    },
-                    {
-                        timeout: 5,
-                    }
-                )
+                .post(`${process.env.VUE_APP_BACKEND_BASE_URL}/sanctum/token`, {
+                    email: this.email,
+                    password: this.password,
+                    device_name: "DEFAULT", //TODO get the real name
+                })
                 .then((res) => {
+                    console.log(res);
                     loader.hide();
                     toast.success("User logged in with sucess");
-                    this.$store.commit("makeLogin", res.data); //backend reply with user datas
+                    this.$store.commit("makeLogin", res.data.user_info); //backend reply with user datas
+                    this.$cookies.set("session_info", res.data);
                     this.submit_disabled = false;
                     setTimeout(() => {
                         window.location.replace("/");
@@ -133,7 +130,7 @@ export default {
                 // eslint-disable-next-line no-unused-vars
                 .catch((error) => {
                     loader.hide();
-                    toast.error("Error trying to login with your informations");
+                    toast.error(error.response.data.error);
                     this.submit_disabled = false;
                 });
         },
