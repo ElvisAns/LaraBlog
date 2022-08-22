@@ -53,6 +53,7 @@
                                 >Content:</label
                             >
                             <textarea
+                                rows="8"
                                 v-model="content"
                                 class="form-control"
                                 id="text"
