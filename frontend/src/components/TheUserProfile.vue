@@ -164,7 +164,7 @@
                         Here is the list of current published blogs
                     </h3>
                     <div class="blog-crud table-responsive">
-                        <table class="table">
+                        <table class="table table-striped table-bordered">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -428,7 +428,7 @@ export default {
     font-size: 90px;
     display: block;
     position: relative;
-    top: -50px;
+    top: -20px;
 }
 .table-responsive {
     text-align: left;
