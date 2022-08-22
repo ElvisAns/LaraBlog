@@ -5,6 +5,7 @@ import TheSignupForm from "../components/TheSignupForm.vue";
 import ThePostViewer from "../components/ThePostViewer.vue";
 import TheUserProfile from "../components/TheUserProfile.vue";
 import store from "@/store";
+import vue from "vue";
 
 const routes = [
     {
@@ -33,10 +34,6 @@ const routes = [
         name: "userProfile",
         component: TheUserProfile,
     },
-    {
-        path: "/auth/logout",
-        name: "logout",
-    },
 ];
 
 const router = createRouter({
@@ -56,11 +53,6 @@ router.beforeEach(async (to, from) => {
         to.name !== "userProfile"
     ) {
         return { name: "userProfile" };
-    }
-    if (to.name == "logout") {
-        store.commit("makeLogout");
-        window.location.replace("/");
-        //return { name: "home" };
     }
 });
 
