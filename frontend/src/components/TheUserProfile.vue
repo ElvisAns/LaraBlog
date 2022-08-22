@@ -249,10 +249,15 @@ export default {
     name: "TheUserProfile",
     methods: {
         delete_post() {
+            const cookie = this.$cookies.get("session_info");
+            const config = {
+                headers: { Authorization: `Bearer ${cookie.token}` },
+            };
             const toast = useToast();
             this.axios
                 .get(
-                    `${process.env.VUE_APP_BACKEND_BASE_URL}/posts/delete/${this.currID}`
+                    `${process.env.VUE_APP_BACKEND_BASE_URL}/posts/delete/${this.currID}`,
+                    config
                 )
                 .then(() => {
                     toast.success("Deleted");
@@ -270,6 +275,10 @@ export default {
                 });
         },
         save() {
+            const cookie = this.$cookies.get("session_info");
+            const config = {
+                headers: { Authorization: `Bearer ${cookie.token}` },
+            };
             const toast = useToast();
             const url_pattern =
                 /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w.-]+)+[\w\-._~:/?#[\]@!$&'()*+,;=.]+$/;
@@ -298,7 +307,8 @@ export default {
                             caption: this.caption,
                             image_url: this.image_url,
                             content: this.content,
-                        }
+                        },
+                        config
                     )
                     .then(() => {
                         toast.success("Post updated with success");
@@ -329,7 +339,8 @@ export default {
                             content: this.content,
                             category: 1,
                             user_id: this.user.id,
-                        }
+                        },
+                        config
                     )
                     .then(() => {
                         toast.success("Post created with success");
