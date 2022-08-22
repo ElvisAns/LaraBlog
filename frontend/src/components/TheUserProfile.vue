@@ -1,234 +1,244 @@
 <template>
-    <div
-        class="modal"
-        id="confirm_deletion"
-        tabindex="-1"
-        data-bs-backdrop="static"
-        aria-labelledby="confirm_deletion"
-        aria-hidden="true"
-    >
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Are you sure?</h5>
-                    <button
-                        ref="close_delete_modal"
-                        type="button"
-                        class="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                    ></button>
-                </div>
-                <div class="modal-footer">
-                    <button
-                        type="button"
-                        class="btn btn-secondary"
-                        data-bs-dismiss="modal"
-                    >
-                        cancel
-                    </button>
-                    <button
-                        type="button"
-                        class="btn btn-danger"
-                        @click="delete_post"
-                    >
-                        Yes, delete the post N {{ currID }}
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div
-        class="modal fade"
-        id="edit_create_modal"
-        tabindex="-1"
-        data-bs-backdrop="static"
-        aria-labelledby="edit_create_modalLabel"
-        aria-hidden="true"
-    >
-        <div class="modal-dialog modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="ModalLabel">
-                        Post Action - {{ get_title }}
-                    </h5>
-                    <button
-                        type="button"
-                        class="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                    ></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label class="col-form-label">Title:</label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                v-model="title"
-                            />
-                        </div>
-                        <div class="mb-3">
-                            <label class="col-form-label">Caption:</label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                v-model="caption"
-                            />
-                        </div>
-                        <div class="mb-3">
-                            <label class="col-form-label"
-                                >Illustration image URL:</label
-                            >
-                            <input
-                                type="text"
-                                class="form-control"
-                                v-model="image_url"
-                            />
-                        </div>
-                        <div class="mb-3">
-                            <label for="text" class="col-form-label"
-                                >Content:</label
-                            >
-                            <textarea
-                                rows="8"
-                                v-model="content"
-                                class="form-control"
-                                id="text"
-                            ></textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button
-                        type="button"
-                        class="btn btn-secondary"
-                        data-bs-dismiss="modal"
-                    >
-                        Close
-                    </button>
-                    <button
-                        type="button"
-                        class="btn btn-primary"
-                        ref="saveButton"
-                        @click="save"
-                    >
-                        Save
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <article class="col-md-8 offset-md-2 mt-5">
-                <div>
-                    <div class="cover-container">
-                        <img
-                            src="https://static.vecteezy.com/system/resources/previews/001/589/630/original/green-background-with-fading-square-and-dots-free-vector.jpg"
-                            class="cover-image"
-                        />
-                    </div>
-                    <div class="user-avatar">
-                        <i class="bi bi-person-circle"></i>
-                    </div>
-                    <h1 class="user-name">{{ user.name }}</h1>
-                    <div class="text-secondary">
-                        <strong>Joigned on </strong>
-                        <time :datetime="user.created_at">
-                            <i class="bi bi-clock"></i>
-                            {{ format_date(user.created_at) }}
-                        </time>
-                    </div>
-
-                    <div class="text-secondary">
-                        <time :datetime="user.created_at">
-                            <i class="bi bi-envelope"></i>
-                            {{ user.email }}
-                        </time>
-                    </div>
-
-                    <div>
+    <div>
+        <div
+            class="modal"
+            id="confirm_deletion"
+            tabindex="-1"
+            data-bs-backdrop="static"
+            aria-labelledby="confirm_deletion"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Are you sure?</h5>
                         <button
-                            @click="set_current('create', -1)"
-                            data-bs-toggle="modal"
-                            data-bs-target="#edit_create_modal"
-                            class="btn btn-success my-1"
+                            ref="close_delete_modal"
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
                         >
-                            Create a new post
+                            cancel
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-danger"
+                            @click="delete_post"
+                        >
+                            Yes, delete the post N {{ currID }}
                         </button>
                     </div>
-                    <h3 class="my-2">
-                        Here is the list of current published blogs
-                    </h3>
-                    <div class="blog-crud table-responsive">
-                        <table class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scole="col">Edited on</th>
-                                    <th scope="col">title</th>
-                                    <th scope="col">caption</th>
-                                    <th scope="col">action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="blog in blogs" :key="blog.id">
-                                    <th scope="row">{{ blog.id }}</th>
-                                    <td>{{ format_date(blog.updated_at) }}</td>
-                                    <td>{{ blog.title }}</td>
-                                    <td>{{ blog.caption }}</td>
-                                    <td>
-                                        <button
-                                            @click="
-                                                set_current('edit', blog.id)
-                                            "
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#edit_create_modal"
-                                            class="btn btn-success my-1"
-                                        >
-                                            Edit
-                                        </button>
-                                        <br />
-                                        <button
-                                            @click="
-                                                set_current('delete', blog.id)
-                                            "
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#confirm_deletion"
-                                            class="btn btn-danger my-1"
-                                        >
-                                            Delete
-                                        </button>
-                                        <br />
-                                        <router-link
-                                            :to="
-                                                '/posts/read/' +
-                                                blog.title.replace(/ /g, '-')
-                                            "
-                                        >
-                                            View post
-                                        </router-link>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="modal fade modal-lg"
+            id="edit_create_modal"
+            tabindex="-1"
+            data-bs-backdrop="static"
+            aria-labelledby="edit_create_modalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ModalLabel">
+                            Post Action - {{ get_title }}
+                        </h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
                     </div>
-                    <div class="text-left">
-                        <router-link
-                            class="btn btn-success"
-                            aria-current="page"
-                            to="/"
-                            slots="button"
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label class="col-form-label">Title:</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    v-model="title"
+                                />
+                            </div>
+                            <div class="mb-3">
+                                <label class="col-form-label">Caption:</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    v-model="caption"
+                                />
+                            </div>
+                            <div class="mb-3">
+                                <label class="col-form-label"
+                                    >Illustration image URL:</label
+                                >
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    v-model="image_url"
+                                />
+                            </div>
+                            <div class="mb-3">
+                                <label for="text" class="col-form-label"
+                                    >Content:</label
+                                >
+                                <textarea
+                                    rows="8"
+                                    v-model="content"
+                                    class="form-control"
+                                    id="text"
+                                ></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
                         >
-                            <i class="bi bi-box-arrow-in-left"></i>
-                            Get back home
-                        </router-link>
+                            Close
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-primary"
+                            ref="saveButton"
+                            @click="save"
+                        >
+                            Save
+                        </button>
                     </div>
                 </div>
-            </article>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <article class="col-md-8 offset-md-2 mt-5">
+                    <div>
+                        <div class="cover-container">
+                            <img
+                                src="https://static.vecteezy.com/system/resources/previews/001/589/630/original/green-background-with-fading-square-and-dots-free-vector.jpg"
+                                class="cover-image"
+                            />
+                        </div>
+                        <div class="user-avatar">
+                            <i class="bi bi-person-circle"></i>
+                        </div>
+                        <h1 class="user-name">{{ user.name }}</h1>
+                        <div class="text-secondary">
+                            <strong>Joigned on </strong>
+                            <time :datetime="user.created_at">
+                                <i class="bi bi-clock"></i>
+                                {{ format_date(user.created_at) }}
+                            </time>
+                        </div>
+
+                        <div class="text-secondary">
+                            <time :datetime="user.created_at">
+                                <i class="bi bi-envelope"></i>
+                                {{ user.email }}
+                            </time>
+                        </div>
+
+                        <div>
+                            <button
+                                @click="set_current('create', -1)"
+                                data-bs-toggle="modal"
+                                data-bs-target="#edit_create_modal"
+                                class="btn btn-success my-1"
+                            >
+                                Create a new post
+                            </button>
+                        </div>
+                        <h3 class="my-2">
+                            Here is the list of current published blogs
+                        </h3>
+                        <div class="blog-crud table-responsive">
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scole="col">Edited on</th>
+                                        <th scope="col">title</th>
+                                        <th scope="col">caption</th>
+                                        <th scope="col">action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="blog in blogs" :key="blog.id">
+                                        <th scope="row">{{ blog.id }}</th>
+                                        <td>
+                                            {{ format_date(blog.updated_at) }}
+                                        </td>
+                                        <td>{{ blog.title }}</td>
+                                        <td>{{ blog.caption }}</td>
+                                        <td>
+                                            <button
+                                                @click="
+                                                    set_current('edit', blog.id)
+                                                "
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#edit_create_modal"
+                                                class="btn btn-success my-1"
+                                            >
+                                                Edit
+                                            </button>
+                                            <br />
+                                            <button
+                                                @click="
+                                                    set_current(
+                                                        'delete',
+                                                        blog.id
+                                                    )
+                                                "
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#confirm_deletion"
+                                                class="btn btn-danger my-1"
+                                            >
+                                                Delete
+                                            </button>
+                                            <br />
+                                            <router-link
+                                                :to="
+                                                    '/posts/read/' +
+                                                    blog.title.replace(
+                                                        / /g,
+                                                        '-'
+                                                    )
+                                                "
+                                            >
+                                                View post
+                                            </router-link>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="text-left">
+                            <router-link
+                                class="btn btn-success"
+                                aria-current="page"
+                                to="/"
+                                slots="button"
+                            >
+                                <i class="bi bi-box-arrow-in-left"></i>
+                                Get back home
+                            </router-link>
+                        </div>
+                    </div>
+                </article>
+            </div>
         </div>
     </div>
 </template>
