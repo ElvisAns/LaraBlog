@@ -182,17 +182,11 @@ export default {
             });
 
             this.axios
-                .post(
-                    `${process.env.VUE_APP_BACKEND_BASE_URL}/signup`,
-                    {
-                        email: this.email,
-                        password: this.password,
-                        name: this.name,
-                    },
-                    {
-                        timeout: 5,
-                    }
-                )
+                .post(`${process.env.VUE_APP_BACKEND_BASE_URL}/user/create`, {
+                    email: this.email,
+                    password: this.password,
+                    name: this.name,
+                })
                 // eslint-disable-next-line no-unused-vars
                 .then((res) => {
                     loader.hide();
