@@ -138,6 +138,8 @@ Bingo!!!
 If you did not change any configuration about urls you can access the website at **http://localhost:8080/** 
 
 Enjoy!
+![image](https://user-images.githubusercontent.com/35831811/186032058-27a4e1e7-703e-4f53-bcfd-e4e49a572327.png)
+
 
 Remember that anytime you need to add new mock datas inside the database, you can always run **php artisan db:seed**
 and the terminal will show the user account created so you can easily login without having to signup directly from the website.
