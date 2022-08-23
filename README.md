@@ -155,10 +155,10 @@ Play around with this MVP website with simple yet powerfull blog feature!
     
 ## Running Tests
 
-To run tests against our backend api, run the following command at root
+To run tests against our backend api, run the following command at root (Our tests has been defined as feature so we need --testsuite=Feature)
 
 ```bash
-  php artisan test
+  php artisan test --testsuite=Feature
 ```
 Attention : Running test will wipe all the datas inside the database, so make sure
 you seed the database after perfoming tests!
