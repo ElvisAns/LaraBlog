@@ -39,7 +39,7 @@ Here's why separating things is the right idea:
 In order to run this project on your local environment ensure you have the following tool installed:
  - PHP (At least PHP 7.3) and make sure you can access it globaly in your terminal https://kinsta.com/blog/install-php/
 - Composer for PHP package management https://getcomposer.org/
-- An SQL database Management system (MySQL in most cases) https://www.mysql.com/fr/downloads/
+- A SQL database Management system (We have prefered MySQL) https://www.mysql.com/fr/downloads/
 - NPM & Node JS https://nodejs.org/en/
 - Vue-CLi (optional) https://cli.vuejs.org/guide/
 - Git bash https://git-scm.com/downloads
