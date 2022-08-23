@@ -72,7 +72,7 @@ First you have to clone the project in a given folder on your local machine by
   git clone https://github.com/ElvisAns/LaraBlog.git 
 ```
 
-The navigate inside the folder and run
+Then navigate inside the folder and run
 (Make sure you are having composer 2.x) to avoid error on runing composer install
 
 ```bash
