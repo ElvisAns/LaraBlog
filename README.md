@@ -1,3 +1,9 @@
+#TODO: 
+- DEPLOY THE BACKEND TO HEROKU!
+- ALLOW THE VERSEL APP TO ACCESS OUR BACKEND THROUGH LARAVEL ENV
+- CONFIGURE THE DATABASE AND MAKE IT WORK!!
+------TOMORROW!
+
 <p align="center">
     <img src="https://user-images.githubusercontent.com/35831811/186013587-ff898e23-1c50-4465-9e4a-9829ec4f872f.png">
 </p>
