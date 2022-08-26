@@ -12,6 +12,8 @@
 
 Welcome here!
 
+![Vercel](http://therealsujitk-vercel-badge.vercel.app/?app=lara-blog)
+
 This is another awesome blogging web application running on top of laravel and vue!
 
 We adopted to completely separate backend and frontend in order to explore the
