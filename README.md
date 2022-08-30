@@ -1,9 +1,3 @@
-# TODO: 
-- DEPLOY THE BACKEND TO HEROKU!
-- ALLOW THE VERSEL APP TO ACCESS OUR BACKEND THROUGH LARAVEL ENV
-- CONFIGURE THE DATABASE AND MAKE IT WORK!!
-------TOMORROW!
-
 <p align="center">
     <img src="https://user-images.githubusercontent.com/35831811/186013587-ff898e23-1c50-4465-9e4a-9829ec4f872f.png">
 </p>
@@ -18,9 +12,11 @@
 
 Welcome here!
 
-frontend only : https://lara-blog.vercel.app/ , backend is coming soon!
-
 ![Vercel](http://therealsujitk-vercel-badge.vercel.app/?app=lara-blog)
+
+The api is proudly served by <b>https://render.com/</b> (from a docker service + a postgres database)
+
+<hr/>
 
 This is another awesome blogging web application running on top of laravel and vue!
 
